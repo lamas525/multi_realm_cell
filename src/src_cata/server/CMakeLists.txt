@@ -13,6 +13,7 @@
 # 
 #  By Likan Developer Core C++, SQL (FUN, WoTLK, Cata Realm) of Genesis Server
 # 
+
 if(CMAKE_COMPILER_IS_GNUCXX AND NOT MINGW)
   add_definitions(-fno-delete-null-pointer-checks)
 endif()

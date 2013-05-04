@@ -14,6 +14,8 @@
 #  By Likan Developer Core C++, SQL (FUN, WoTLK, Cata Realm) of Genesis Server
 #
 
+########### authserver ###############
+
 if( USE_COREPCH )
   include_directories(${CMAKE_CURRENT_BINARY_DIR})
 endif()
@@ -119,7 +121,6 @@ elseif( WIN32 )
   install(FILES authserver.conf.dist DESTINATION "${CMAKE_INSTALL_PREFIX}")
 endif()
 
-#fix
 # Generate precompiled header
 if (USE_COREPCH)
   add_cxx_pch(authserver ${authserver_PCH_HDR} ${authserver_PCH_SRC})

@@ -14,11 +14,6 @@
 #  By Likan Developer Core C++, SQL (FUN, WoTLK, Cata Realm) of Genesis Server
 # 
 
-#if(CMAKE_COMPILER_IS_GNUCXX)
-#  add_definitions(-fno-delete-null-pointer-checks)
-#endif()
-
-add_subdirectory(genrev)
 add_subdirectory(server)
 
 if(TOOLS)

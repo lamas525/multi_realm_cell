@@ -14,11 +14,6 @@
 #  By Likan Developer Core C++, SQL (FUN, WoTLK, Cata Realm) of Genesis Server
 #
 
-#if( USE_COREPCH )
-#  include_directories(${CMAKE_CURRENT_BINARY_DIR})
-#endif()
-
-#fix
 if (USE_COREPCH)
   set(shared_STAT_PCH_HDR PrecompiledHeaders/sharedPCH.h)
   set(shared_STAT_PCH_SRC PrecompiledHeaders/sharedPCH.cpp)
@@ -33,6 +28,7 @@ file(GLOB_RECURSE sources_Logging Logging/*.cpp Logging/*.h)
 file(GLOB_RECURSE sources_Packets Packets/*.cpp Packets/*.h)
 file(GLOB_RECURSE sources_Threading Threading/*.cpp Threading/*.h)
 file(GLOB_RECURSE sources_Utilities Utilities/*.cpp Utilities/*.h)
+
 file(GLOB sources_localdir *.cpp *.h)
 
 source_group(CMake FILES CMakeLists.txt)

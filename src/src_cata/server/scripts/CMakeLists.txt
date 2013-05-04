@@ -54,7 +54,6 @@ source_group(PrecompiledHeaders FILES ${sources_PrecompiledHeaders})
 source_group(Spells FILES ${sources_Spells})
 source_group(World FILES ${sources_World}
 source_group(CMake FILES CMakeLists.txt)
-
 )
 
 if (USE_SCRIPTPCH)
@@ -63,11 +62,11 @@ if (USE_SCRIPTPCH)
 endif ()
 
 message(STATUS "SCRIPT PREPARATIONS")
-#include(Spells/CMakeLists.txt)
+include(Spells/CMakeLists.txt)
 
-#include(Commands/CMakeLists.txt)
+include(Commands/CMakeLists.txt)
 
-#include(Examples/CMakeLists.txt)
+include(Examples/CMakeLists.txt)
 
 set(scripts_STAT_SRCS
   ${scripts_STAT_SRCS}
@@ -78,11 +77,9 @@ set(scripts_STAT_SRCS
 
 if(SCRIPTS)
   include(Cataclysm/CMakeLists.txt)
-  include(Commands/CMakeLists.txt)
   include(Custom/CMakeLists.txt)
   include(EasternKingdoms/CMakeLists.txt)
   include(Events/CMakeLists.txt)
-  include(Examples/CMakeLists.txt)
   include(Kalimdor/CMakeLists.txt)
   include(Maelstrom/CMakeLists.txt)
   include(Mods/CMakeLists.txt)
@@ -91,7 +88,6 @@ if(SCRIPTS)
   include(Outland/CMakeLists.txt)
   include(Pandaria/CMakeLists.txt)
   include(PrecompiledHeaders/CMakeLists.txt)
-  include(Spells/CMakeLists.txt)
   include(World/CMakeLists.txt)
 endif()
 
@@ -105,6 +101,7 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/dep_tc/g3dlite/include
   ${CMAKE_SOURCE_DIR}/dep_tc/SFMT
   ${CMAKE_SOURCE_DIR}/dep_tc/zlib
+  ${CMAKE_SOURCE_DIR}/dep_tc/lualib
   ${CMAKE_SOURCE_DIR}/src/src_cata/server/shared
   ${CMAKE_SOURCE_DIR}/src/src_cata/server/shared/Configuration
   ${CMAKE_SOURCE_DIR}/src/src_cata/server/shared/Cryptography
@@ -121,7 +118,6 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/src/src_cata/server/collision/Management
   ${CMAKE_SOURCE_DIR}/src/src_cata/server/collision/Models
   ${CMAKE_SOURCE_DIR}/src/src_cata/server/LuaEngine
-  ${CMAKE_SOURCE_DIR}/dep_tc/lualib
   ${CMAKE_SOURCE_DIR}/src/src_cata/server/shared
   ${CMAKE_SOURCE_DIR}/src/src_cata/server/shared/Database
   ${CMAKE_SOURCE_DIR}/src/src_cata/server/game/Accounts
@@ -210,11 +206,3 @@ add_dependencies(scripts revision.h)
 if (USE_SCRIPTPCH)
   add_cxx_pch(scripts ${scripts_STAT_PCH_HDR} ${scripts_STAT_PCH_SRC})
 endif()
-
-#if( USE_SCRIPTPCH )
-#  if(CMAKE_COMPILER_IS_GNUCXX)
-#    add_precompiled_header(scripts ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/ScriptPCH.h)
-#  elseif(MSVC)
-#    add_native_precompiled_header(scripts ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/ScriptPCH)
-#  endif()
-#endif()
