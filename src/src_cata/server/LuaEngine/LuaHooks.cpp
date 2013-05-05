@@ -850,7 +850,7 @@ public:
             sEluna->ExecuteCall(3, 0);
         }
     }
-    void OnMoneyChanged(Player* player, int32& amount)
+    void OnMoneyChanged(Player* player, int64& amount)
     {
         for (std::vector<int>::iterator itr = sEluna->ServerEventBindings[PLAYER_EVENT_ON_MONEY_CHANGE].begin();
             itr != sEluna->ServerEventBindings[PLAYER_EVENT_ON_MONEY_CHANGE].end(); ++itr)
@@ -1169,7 +1169,7 @@ public:
             sEluna->ExecuteCall(2, 0);
         }
     }
-    void OnMemberWitdrawMoney(Guild* guild, Player* player, uint32 &amount, bool isRepair)
+    void OnMemberWitdrawMoney(Guild* guild, Player* player, uint64 &amount, bool isRepair)
     {
         for (std::vector<int>::iterator itr = sEluna->ServerEventBindings[GUILD_EVENT_ON_MONEY_WITHDRAW].begin();
             itr != sEluna->ServerEventBindings[GUILD_EVENT_ON_MONEY_WITHDRAW].end(); ++itr)
@@ -1183,7 +1183,7 @@ public:
             sEluna->ExecuteCall(5, 0);
         }
     }
-    void OnMemberDepositMoney(Guild* guild, Player* player, uint32 &amount)
+    void OnMemberDepositMoney(Guild* guild, Player* player, uint64 &amount)
     {
         for (std::vector<int>::iterator itr = sEluna->ServerEventBindings[GUILD_EVENT_ON_MONEY_DEPOSIT].begin();
             itr != sEluna->ServerEventBindings[GUILD_EVENT_ON_MONEY_DEPOSIT].end(); ++itr)

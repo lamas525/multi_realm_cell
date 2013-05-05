@@ -1,18 +1,3 @@
-# 
-# Copyright (C) Likan Mod   (https://github.com/ChaosDevLikan/)
-# Copyright (C) Prydev      (http://sourceforge.net/projects/prydevserver) 
-# Copyright (C) TrinityCore (http://www.trinitycore.org)
-# Copyright (C) MaNGOS      (http://www.getmangos.com)
-# Copyright (C) ArkCORE     (http://www.arkania.net)
-# Copyright (C) SkyFireEMU  (http://www.projectskyfire.org)
-# 
-# World of Warcraft
-# You can edit but you can not delete this copyright.
-# Genesis Emulator - Genesis Database 
-# 
-# 
-#  By Likan Developer Core C++, SQL (FUN, WoTLK, Cata Realm) of Genesis Server
-# 
 # set up output paths for executable binaries (.exe-files, and .dll-files on DLL-capable platforms)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
@@ -35,11 +20,8 @@ else()
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LARGEADDRESSAWARE")
   message(STATUS "MSVC: Enabled large address awareness")
 
-  # Test if we need SSE2-support
-  if(USE_SFMT)
-    add_definitions(/arch:SSE2)
-    message(STATUS "MSVC: Enabled SSE2 support")
-  endif()
+  add_definitions(/arch:SSE2)
+  message(STATUS "MSVC: Enabled SSE2 support")
 endif()
 
 # Set build-directive (used in core to tell which buildtype we used)
@@ -68,3 +50,13 @@ if(NOT WITH_WARNINGS)
     message(STATUS "MSVC: Disabled generic compiletime warnings")
   endif()
 endif()
+
+# Specify the maximum PreCompiled Header memory allocation limit
+# Fixes a compiler-problem when using PCH - the /Ym flag is adjusted by the compiler in MSVC2012, hence we need to set an upper limit with /Zm to avoid disrupancies)
+# (And yes, this is a verified , unresolved bug with MSVC... *sigh*)
+string(REPLACE "/Zm1000" "/Zm500" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+
+# Enable and treat as errors the following warnings to easily detect virtual function signature failures:
+# 'function' : member function does not override any base class virtual member function
+# 'virtual_function' : no override available for virtual member function from base 'class'; function is hidden
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /we4263 /we4264")

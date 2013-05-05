@@ -14,26 +14,12 @@
 #  By Likan Developer Core C++, SQL (FUN, WoTLK, Cata Realm) of Genesis Server
 #
 
-if( USE_SCRIPTPCH )
-  include_directories(
-    ${CMAKE_CURRENT_BINARY_DIR}
-  )
-endif()
-
 file(GLOB_RECURSE sources_CommandLine CommandLine/*.cpp CommandLine/*.h)
 file(GLOB_RECURSE sources_PrecompiledHeaders PrecompiledHeaders/*.cpp PrecompiledHeaders/*.h)
 file(GLOB_RECURSE sources_RemoteAccess RemoteAccess/*.cpp RemoteAccess/*.h)
 file(GLOB_RECURSE sources_TCSoap TCSoap/*.cpp TCSoap/*.h)
 file(GLOB_RECURSE sources_WorldThread WorldThread/*.cpp WorldThread/*.h)
 file(GLOB sources_localdir *.cpp *.h)
-
-source_group(CMake FILES CMakeLists.txt)
-
-source_group(CommandLine FILES ${sources_CommandLine})
-source_group(PrecompiledHeaders FILES ${sources_PrecompiledHeaders})
-source_group(RemoteAccess FILES ${sources_RemoteAccess})
-source_group(TCSoap FILES ${sources_TCSoap})
-source_group(WorldThread FILES ${sources_WorldThread})
 
 if (USE_COREPCH)
   set(worldserver_PCH_HDR PrecompiledHeaders/worldPCH.h)
@@ -222,7 +208,6 @@ elseif( WIN32 )
   install(TARGETS worldserver DESTINATION "${CMAKE_INSTALL_PREFIX}")
   install(FILES worldserver.conf.dist DESTINATION "${CMAKE_INSTALL_PREFIX}")
 endif()
-
 
 # Generate precompiled header
 if( USE_COREPCH )

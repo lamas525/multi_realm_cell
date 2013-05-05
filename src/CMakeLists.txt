@@ -14,16 +14,6 @@
 #  By Likan Developer Core C++, SQL (FUN, WoTLK, Cata Realm) of Genesis Server
 # 
 
-# Needs to link against likanmod_worldd.lib
-#if(WIN32)
-#  link_directories(
-#    ${CMAKE_BINARY_DIR}/src/likanmod/${CMAKE_CFG_INTDIR}
-#  )
-#  include_directories(
-#    ${CMAKE_SOURCE_DIR}/dep/include # For Win32
-#  )
-#endif()
-
 ##############################
 add_subdirectory(genrev)
 

@@ -24,12 +24,6 @@ file(GLOB_RECURSE sources_Maps Maps/*.cpp Maps/*.h)
 file(GLOB_RECURSE sources_Models Models/*.cpp Models/*.h)
 file(GLOB sources_localdir *.cpp *.h)
 
-source_group(CMake FILES CMakeLists.txt)
-source_group(Management FILES ${sources_Management})
-source_group(PrecompiledHeaders FILES ${sources_PrecompiledHeaders})
-source_group(Maps FILES ${sources_Maps})
-source_group(Models FILES ${sources_Models})
-
 if (USE_COREPCH)
   set(collision_STAT_PCH_HDR PrecompiledHeaders/collisionPCH.h)
   set(collision_STAT_PCH_SRC PrecompiledHeaders/collisionPCH.cpp)
@@ -93,6 +87,10 @@ include_directories(
 add_library(collision STATIC
   ${collision_STAT_SRCS}
   ${collision_STAT_PCH_SRC}
+)
+
+target_link_libraries(collision
+  shared
 )
 
 # Generate precompiled header

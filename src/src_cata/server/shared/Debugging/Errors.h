@@ -18,7 +18,28 @@
 
 #ifndef TRINITYCORE_ERRORS_H
 #define TRINITYCORE_ERRORS_H
+/*
+namespace Trinity {
 
+void Assert(char const *file, int line, char const *function, char const *message);
+
+void Fatal(char const *file, int line, char const *function, char const *message);
+
+void Error(char const *file, int line, char const *function, char const *message);
+
+void Warning(char const *file, int line, char const *function, char const *message);
+
+} // namespace Trinity
+
+#define WPAssert(cond) do { if (!(cond)) Trinity::Assert(__FILE__, __LINE__, __FUNCTION__, #cond); } while(0)
+#define WPFatal(cond, msg) do { if (!(cond)) Trinity::Fatal(__FILE__, __LINE__, __FUNCTION__, (msg)); } while(0)
+#define WPError(cond, msg) do { if (!(cond)) Trinity::Error(__FILE__, __LINE__, __FUNCTION__, (msg)); } while(0)
+#define WPWarning(cond, msg) do { if (!(cond)) Trinity::Warning(__FILE__, __LINE__, __FUNCTION__, (msg)); } while(0)
+
+#define ASSERT WPAssert
+
+#endif
+*/
 #include "Common.h"
 #include "Log.h"
 #include <ace/Stack_Trace.h>

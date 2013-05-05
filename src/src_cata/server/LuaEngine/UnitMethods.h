@@ -716,11 +716,11 @@ public:
         TO_UNIT();
 
         if (Player* player = unit->ToPlayer())
-            sEluna->PushUnsigned(L, player->GetShieldBlockValue());
+            sEluna->PushUnsigned(L, player->GetBlockPercent());
         if (Creature* creature = unit->ToCreature())
-            sEluna->PushUnsigned(L, creature->GetShieldBlockValue());
+            sEluna->PushUnsigned(L, creature->GetBlockPercent());
         else
-            sEluna->PushUnsigned(L, unit->GetShieldBlockValue());
+            sEluna->PushUnsigned(L, unit->GetBlockPercent());
         return 1;
     }
 
