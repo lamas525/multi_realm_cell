@@ -2564,7 +2564,8 @@ void Spell::EffectEnchantItemPerm(SpellEffIndex effIndex)
     Player* p_caster = (Player*)m_caster;
 
     // Handle vellums
-    if (itemTarget->IsVellum())
+    if (itemTarget->IsVellum() /*|| itemTarget->IsWeaponVellum() || itemTarget->IsArmorVellum()*/)
+
     {
         // destroy one vellum from stack
         uint32 count = 1;

@@ -108,6 +108,7 @@ bool Player::UpdateStats(Stats stat)
     else if (stat == STAT_AGILITY)
     {
         UpdateAttackPowerAndDamage(false);
+
         UpdateAttackPowerAndDamage(true);
     }
 	 else
@@ -115,7 +116,7 @@ bool Player::UpdateStats(Stats stat)
         // Need update (exist AP from stat auras)
         if (HasAuraTypeWithMiscvalue(SPELL_AURA_MOD_ATTACK_POWER_OF_STAT_PERCENT, stat))
             UpdateAttackPowerAndDamage(false);
-        //if (HasAuraTypeWithMiscvalue(SPELL_AURA_MOD_ATTACK_POWER_OF_STAT_PERCENT, stat))
+
 		if (HasAuraTypeWithMiscvalue(SPELL_AURA_MOD_RANGED_ATTACK_POWER_OF_STAT_PERCENT, stat))
             UpdateAttackPowerAndDamage(true);
     }
@@ -179,7 +180,6 @@ bool Player::UpdateAllStats()
         UpdateMaxPower(Powers(i));
 
     UpdateAllRatings();
-	UpdateMasteryPercentage();
     UpdateAllCritPercentages();
     UpdateAllSpellCritChances();
 	UpdateDefenseBonusesMod();
@@ -261,13 +261,15 @@ float Player::GetHealthBonusFromStamina()
     if (gtOCTHpPerStaminaEntry const* hpBase = sGtOCTHpPerStaminaStore.LookupEntry((getClass() - 1) * GT_MAX_LEVEL + getLevel() - 1))
         ratio = hpBase->ratio;
 
-	float stamina = GetStat(STAT_STAMINA);
-    //float baseStam = stamina < 20.0f ? stamina : 20.0f;
-	float baseStam = std::min(20.0f, stamina);
-    float moreStam = stamina - baseStam;
+    float stamina = GetStat(STAT_STAMINA);
 
-    //return baseStam + (moreStam*14.0f);
+    float baseStam = stamina < 20 ? stamina : 20;
+    float moreStam = stamina - baseStam;
+    if (moreStam < 0.0f)
+        moreStam = 0.0f;
+
 	return baseStam + moreStam * ratio;
+    //return baseStam + moreStam * hpBase->ratio;
 }
 
 float Player::GetManaBonusFromIntellect()
@@ -744,6 +746,33 @@ const float m_diminishing_k[MAX_CLASSES] =
     0.9720f   // Druid
 };
 
+float Player::GetMissPercentageFromDefence() const
+{
+    float const miss_cap[MAX_CLASSES] =
+    {
+        16.00f,     // Warrior //correct
+        16.00f,     // Paladin //correct
+        16.00f,     // Hunter  //?
+        16.00f,     // Rogue   //?
+        16.00f,     // Priest  //?
+        16.00f,     // DK      //correct
+        16.00f,     // Shaman  //?
+        16.00f,     // Mage    //?
+        16.00f,     // Warlock //?
+        0.0f,       // ??
+        16.00f      // Druid   //?
+    };
+
+    float diminishing = 0.0f, nondiminishing = 0.0f;
+    // Modify value from defense skill (only bonus from defense rating diminishes)
+    nondiminishing += (GetSkillValue(SKILL_DEFENSE) - GetMaxSkillValueForLevel()) * 0.04f;
+    diminishing += (int32(GetRatingBonusValue(CR_DEFENSE_SKILL))) * 0.04f;
+
+    // apply diminishing formula to diminishing miss chance
+    uint32 pclass = getClass()-1;
+    return nondiminishing + (diminishing * miss_cap[pclass] / (diminishing + miss_cap[pclass] * m_diminishing_k[pclass]));
+}
+
 void Player::UpdateParryPercentage()
 {
     const float parry_cap[MAX_CLASSES] =
@@ -1003,15 +1032,6 @@ void Player::_RemoveAllStatBonuses()
 
     UpdateAllStats();
 }
-
-/*void Player::UpdateMastery()
-{
-    if (HasAuraType(SPELL_AURA_MASTERY))
-    {
-        SetInt32Value(PLAYER_FIELD_COMBAT_RATING_1 + CR_MASTERY, _baseRatingValue[CR_MASTERY]);
-        SetFloatValue(PLAYER_MASTERY, GetMasteryPoints());
-    }
-}*/
 
 /*#######################################
 ########                         ########

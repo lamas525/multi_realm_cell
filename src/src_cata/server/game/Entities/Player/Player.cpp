@@ -27482,4 +27482,3 @@ void Player::RecalculateMasteryAuraEffects(uint32 branch)
                 aura->RecalculateAmountOfEffects();
     }
 }
-
