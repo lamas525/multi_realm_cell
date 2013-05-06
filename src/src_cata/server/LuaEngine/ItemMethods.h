@@ -258,24 +258,26 @@ public:
         return 1;
     }
 
-//    static int IsWeaponVellum(lua_State* L, Item* item)
-/*    {
+    static int IsWeaponVellum(lua_State* L, Item* item)
+    {
         if (!item || !item->IsInWorld())
             sEluna->PushBoolean(L, false);
         else
-            sEluna->PushBoolean(L, item->IsWeaponVellum());
+            //sEluna->PushBoolean(L, item->IsWeaponVellum());
+		    sEluna->PushBoolean(L, item->IsVellum());
         return 1;
     }
-*/
-//    static int IsArmorVellum(lua_State* L, Item* item)
-/*    {
+
+    static int IsArmorVellum(lua_State* L, Item* item)
+    {
         if (!item || !item->IsInWorld())
             sEluna->PushBoolean(L, false);
        else
-            sEluna->PushBoolean(L, item->IsArmorVellum());
+            //sEluna->PushBoolean(L, item->IsArmorVellum());
+		    sEluna->PushBoolean(L, item->IsVellum());
         return 1;
     }
-*/
+
     static int IsConjuredConsumable(lua_State* L, Item* item)
     {
         if (!item || !item->IsInWorld())

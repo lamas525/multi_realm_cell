@@ -471,7 +471,7 @@ namespace LuaGlobalFunctions
             sEluna->LuaWorldAI->ScriptEventsReset();
         return 0;
     }
-
+/*******************************************************   error start   *****************************************************************/
     // PerformIngameSpawn(spawntype, entry, mapid, x, y, z, o[, save, DurOrResptime, phase])
     // spawntype: 1 Creature, 2 Object. DurOrResptime is respawntime for gameobjects and despawntime for creatures if creature is not saved
     static int PerformIngameSpawn(lua_State* L)
@@ -590,8 +590,8 @@ namespace LuaGlobalFunctions
             luaL_error(L, "Eluna Nova:: Opcode %d is greater than the max Opcode type (%d)!", opcode, NUM_OPCODE_HANDLERS);
         else
         {
-            //WorldPacket* _packet = new WorldPacket(opcode, size);
-            //sEluna->PushPacket(L, _packet);
+            //WorldPacket* &packet = new WorldPacket(opcode, size);
+            //sEluna->PushPacket(L, packet);
             return 1;
         }
         return 0;
@@ -648,7 +648,7 @@ namespace LuaGlobalFunctions
             sObjectMgr->RemoveVendorItem(entry, (*itr)->item, persist);
         return 0;
     }
-
+/*******************************************************   error end   *****************************************************************/
     // Kick(player)
     static int Kick(lua_State* L)
     {
