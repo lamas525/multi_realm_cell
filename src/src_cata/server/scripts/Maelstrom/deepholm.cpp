@@ -84,13 +84,13 @@ class npc_slaincrewmember : public CreatureScript
                 }
             }
         }
-/*       void UpdateAI(uint32 const diff)
+       void UpdateAI(uint32 const diff)
         {
             if(!QuestInProgress)
                 return;
-*/
-//            Player* player = Unit::GetPlayer(*me, playerGUID);
-/*
+
+            Player* player = Unit::GetPlayer(*me, playerGUID);
+
             if(!player)
                 return;
 
@@ -98,41 +98,41 @@ class npc_slaincrewmember : public CreatureScript
             {
                 switch (RAND(0, 1, 2, 3, 4))
                 {
-*/
-/*
+
+
                     case 0:
-                        me->MonsterSay(CREW_SAY_1, LANGUAGE_UNIVERSAL, NULL);
+                        me->MonsterSay(CREW_SAY_1, LANG_UNIVERSAL, NULL);
                         player->KilledMonsterCredit(42758, 0);
                         QuestInProgress = false;
                         break;
                     case 1:
-                        me->MonsterSay(CREW_SAY_2, LANGUAGE_UNIVERSAL, NULL);
+                        me->MonsterSay(CREW_SAY_2, LANG_UNIVERSAL, NULL);
                         player->KilledMonsterCredit(42758, 0);
                         QuestInProgress = false;
                         break;
                     case 2:
-                        me->MonsterSay(CREW_SAY_3, LANGUAGE_UNIVERSAL, NULL);
+                        me->MonsterSay(CREW_SAY_3, LANG_UNIVERSAL, NULL);
                         player->KilledMonsterCredit(42758, 0);
                         QuestInProgress = false;
                         break;
                     case 3:
-                        me->MonsterSay(CREW_SAY_4, LANGUAGE_UNIVERSAL, NULL);
+                        me->MonsterSay(CREW_SAY_4, LANG_UNIVERSAL, NULL);
                         player->KilledMonsterCredit(42758, 0);
                         QuestInProgress = false;
                         break;
                     case 4:
-                        me->MonsterSay(CREW_SAY_5, LANGUAGE_UNIVERSAL, NULL);
+                        me->MonsterSay(CREW_SAY_5, LANG_UNIVERSAL, NULL);
                         me->setFaction(14);
                         me->AddThreat(player, 53.0f);
                         me->AI()->AttackStart(player);
                         QuestInProgress = false;
                         break;
-*/
-/*                }
+
+                }
             }
             else sayTimer -= diff;
         }
-*/    };
+    };
 
     CreatureAI* GetAI(Creature* creature) const
     {
