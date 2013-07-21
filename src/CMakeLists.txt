@@ -18,7 +18,6 @@
 add_subdirectory(genrev)
 
 add_subdirectory(src_cata)
-#add_subdirectory(src_mop)
 #add_subdirectory(src_wotlk)
 
 ##############################
