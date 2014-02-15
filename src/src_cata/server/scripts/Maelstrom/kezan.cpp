@@ -14,7 +14,6 @@
  * By Likan Developer Core C++, SQL (FUN, WoTLK, Cata Realm) of Genesis Server
  */
 
-
 #include "ScriptPCH.h"
 #include "ScriptedEscortAI.h"
 #include "SpellMgr.h"
@@ -38,7 +37,7 @@ enum NPC_DeffiantTroll
 #define SAY_WORK_6 "Sorry, mon. It won't happen again."
 #define SAY_WORK_7 "What I doin' wrong? Don't I get a lunch and two breaks a day, mon?"
 #define SAY_WORK_8 "Ouch! Dat hurt!"
-/*
+
 class npc_defiant_troll : public CreatureScript
 {
     public:
@@ -61,14 +60,14 @@ class npc_defiant_troll : public CreatureScript
             rebuffTimer = 0;
             work = false;
         }
-*/
-//        void MovementInform(uint32 /*type*/, uint32 id)
-/*        {
+
+        void MovementInform(uint32 /*type*/, uint32 id)
+        {
             if (id == 1)
                 work = true;
-*/ //       }
-/*
-        void SpellHit(Unit* caster, const SpellEntry* spell)
+        }
+
+        void SpellHit(Unit* caster, SpellInfo const* spell)
         {
             if (spell->Id == SPELL_LIGHTNING_VISUAL && caster->GetTypeId() == TYPEID_PLAYER
                 && caster->ToPlayer()->GetQuestStatus(QUEST_GOOD_HELP_IS_HARD_TO_FIND) == QUEST_STATUS_INCOMPLETE && work == false)
@@ -76,39 +75,37 @@ class npc_defiant_troll : public CreatureScript
                 caster->ToPlayer()->KilledMonsterCredit(DEFFIANT_KILL_CREDIT, me->GetGUID());
                 switch (urand(0, 7))
                 {
-						
-						                    case 0:
-                        me->MonsterYell(SAY_WORK_1, LANGUAGE_UNIVERSAL, 0);
+                    case 0:
+                        me->MonsterYell(SAY_WORK_1, LANG_UNIVERSAL, 0);
                         break;
                     case 1:
-                        me->MonsterYell(SAY_WORK_2, LANGUAGE_UNIVERSAL, 0);
+                        me->MonsterYell(SAY_WORK_2, LANG_UNIVERSAL, 0);
                         break;
                     case 2:
-                        me->MonsterYell(SAY_WORK_3, LANGUAGE_UNIVERSAL, 0);
+                        me->MonsterYell(SAY_WORK_3, LANG_UNIVERSAL, 0);
                         break;
                     case 3:
-                        me->MonsterYell(SAY_WORK_4, LANGUAGE_UNIVERSAL, 0);
+                        me->MonsterYell(SAY_WORK_4, LANG_UNIVERSAL, 0);
                         break;
                     case 4:
-                        me->MonsterYell(SAY_WORK_5, LANGUAGE_UNIVERSAL, 0);
+                        me->MonsterYell(SAY_WORK_5, LANG_UNIVERSAL, 0);
                         break;
                     case 5:
-                        me->MonsterYell(SAY_WORK_6, LANGUAGE_UNIVERSAL, 0);
+                        me->MonsterYell(SAY_WORK_6, LANG_UNIVERSAL, 0);
                         break;
                     case 6:
-                        me->MonsterYell(SAY_WORK_7, LANGUAGE_UNIVERSAL, 0);
+                        me->MonsterYell(SAY_WORK_7, LANG_UNIVERSAL, 0);
                         break;
                     case 7:
-                        me->MonsterYell(SAY_WORK_8, LANGUAGE_UNIVERSAL, 0);
+                        me->MonsterYell(SAY_WORK_8, LANG_UNIVERSAL, 0);
                         break;
-						
                 }
                 me->RemoveAllAuras();
                 if (GameObject* Deposit = me->FindNearestGameObject(GO_DEPOSIT, 20))
                     me->GetMotionMaster()->MovePoint(1, Deposit->GetPositionX()-1, Deposit->GetPositionY(), Deposit->GetPositionZ());
             }
         }
-		
+
         void UpdateAI(const uint32 diff)
         {
             if (work == true)
@@ -139,13 +136,15 @@ class npc_defiant_troll : public CreatureScript
             DoMeleeAttackIfReady();
         }
     };
-	
+
     bool OnGossipHello(Player* player, Creature* creature)
     {
         if (player->GetQuestStatus(QUEST_GOOD_HELP_IS_HARD_TO_FIND) == QUEST_STATUS_INCOMPLETE)
         {
             player->CastSpell(creature, SPELL_LIGHTNING_VISUAL, true);
-            SpellEntry const* spell = sSpellStore.LookupEntry(SPELL_LIGHTNING_VISUAL);
+			//rebase in new call
+			//SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellId);
+            SpellInfo const* spell = sSpellMgr->GetSpellInfo(SPELL_LIGHTNING_VISUAL);
             CAST_AI(npc_defiant_troll::npc_defiant_trollAI, creature->AI())->SpellHit(player, spell);
             return true;
         }
@@ -165,25 +164,25 @@ public:
         npc_fourth_and_goal_targetAI(Creature* creature) : ScriptedAI(creature) {}
 
         void Reset() {}
-*/
-//        void UpdateAI(const uint32 /*diff*/)
-//        {
-//            Unit* target = NULL;
-/*           target = me->SelectNearestTarget(5.0f);
+
+        void UpdateAI(const uint32 diff)
+        {
+            Unit* target = NULL;
+            target = me->SelectNearestTarget(5.0f);
             if (target && target->GetTypeId() == TYPEID_PLAYER)
                 if (target->ToPlayer()->GetQuestStatus(28414) == QUEST_STATUS_INCOMPLETE)
                     target->ToPlayer()->KilledMonsterCredit(37203, 0);
         }
     };
 
- //   CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const
     {
         return new npc_fourth_and_goal_targetAI(creature);
     }
 };
-*/
+
 void AddSC_kezan()
 {
-    //new npc_fourth_and_goal_target();
-    //new npc_defiant_troll();
+    new npc_fourth_and_goal_target;
+    new npc_defiant_troll;
 }

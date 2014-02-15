@@ -124,8 +124,12 @@ const std::string CustomSpellDifficultyfmt = "ppppp";
 const std::string CustomSpellDifficultyIndex = "id";
 char const SpellDurationfmt[] = "niii";
 char const SpellEffectEntryfmt[] = "nifiiiffiiiiiifiifiiiiiiiix";// (104) (108)
-char const SpellEntryfmt[] = "niiiiiiiiiiiiiiifiiiissxxiixxifiiiiiiixiiiiiiiix";
-const std::string CustomSpellEntryfmt = "papppppppppppapapaaaaaaaaaaapaaapapppppppaaaaapaapaaaaaaaaaaaaaaaaaappppppppppppppppppppppppppppppppppppaaaaaapppppppppaaapppppppppaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaappppppppapppaaaaappaaaaaaa";
+//                                             0         10        20    26
+const std::string CustomSpellEffectEntryfmt = "ppppppppppapppappppppppppp";
+const std::string CustomSpellEffectEntryIndex = "Id";
+//                     0         10        20        30        40     47
+char const SpellEntryfmt[] =            "niiiiiiiiiiiiiiifiiiissxxiixxifiiiiiiixiiiiiiiix";
+const std::string CustomSpellEntryfmt = "ppppppppppppppapaaaaaaaaapaaaaaapapppaapppaaapa";
 const std::string CustomSpellEntryIndex = "Id";
 char const SpellFocusObjectfmt[] = "nx";
 char const SpellItemEnchantmentfmt[] = "nxiiiiiixxxiiisiiiiiiix";
